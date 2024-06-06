@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
   const db = await mongo(event.context.mongouuid)
 
   const filter: Filter<Message> = {
-    $and: [{ $text: { $search: query.toString() } }],
+    $and: [{ text: { $regex: query.toString(), $options: 'i' } }],
   }
 
   if (channel)
